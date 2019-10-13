@@ -1,0 +1,1 @@
+{"massages":[{"id":1,"user":{"id":1,"name":"Eve"},"massage":"getSystemJournal(0)"},{"id":2,"user":{"id":1,"name":"Eve"},"massage":"getSystemJournal(1)"},{"id":3,"user":{"id":2,"name":"Adam"},"massage":"getSystemJournal(0)"},{"id":4,"user":{"id":2,"name":"Adam"},"massage":"getSystemJournal(1)"}]}

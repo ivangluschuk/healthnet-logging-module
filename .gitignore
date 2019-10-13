@@ -1,0 +1,9 @@
+.gradle/
+.idea/
+build/
+gradle/
+lib/
+out/
+healthnet-logging-module.iml
+gradlew
+gradlew.bat
