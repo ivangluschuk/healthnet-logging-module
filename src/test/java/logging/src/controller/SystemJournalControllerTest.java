@@ -37,18 +37,43 @@ public class SystemJournalControllerTest {
 
     @Test
     @Transactional
-    public void getUserSystemJournal() throws Exception {
+    public void getUserSystemJournalWithZeroOffset() throws Exception {
         File file = ResourceUtils
-                .getFile("classpath:json/controller/SystemJournalControllerTest#getUserSystemJournal.json");
+                .getFile("classpath:json/controller/SystemJournalControllerTest#getUserSystemJournalWithZeroOffset.json");
         String preparedJsonResponse = new String(Files.readAllBytes(file.toPath()));
 
         final var user = new User();
         user.setName("Eve");
 
-        userService.mockWork(user,"getUserSystemJournal(0)");
-        userService.mockWork(user,"getUserSystemJournal(1)");
+        for (int i = 0; i < 10; i++) {
+            userService.mockWork(user,"getUserSystemJournal(" + i + ")");
+        }
 
-        var response = this.mockMvc.perform(get("/journal/id=1"))
+        var response = this.mockMvc.perform(get("/journal/id=1&limit=10&offset=0"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+
+        var responseBody = response.getResponse().getContentAsString();
+
+        assertEquals(responseBody, preparedJsonResponse);
+    }
+
+    @Test
+    @Transactional
+    public void getUserSystemJournalWithNonZeroOffset() throws Exception {
+        File file = ResourceUtils
+                .getFile("classpath:json/controller/SystemJournalControllerTest#getUserSystemJournalWithNonZeroOffset.json");
+        String preparedJsonResponse = new String(Files.readAllBytes(file.toPath()));
+
+        final var user = new User();
+        user.setName("Eve");
+
+        for (int i = 0; i < 10; i++) {
+            userService.mockWork(user,"getUserSystemJournal(" + i + ")");
+        }
+
+        var response = this.mockMvc.perform(get("/journal/id=1&limit=2&offset=2"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
@@ -75,7 +100,7 @@ public class SystemJournalControllerTest {
         userService.mockWork(user_1, "getSystemJournal(0)");
         userService.mockWork(user_1, "getSystemJournal(1)");
 
-        var response = this.mockMvc.perform(get("/journal"))
+        var response = this.mockMvc.perform(get("/journal/all"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
