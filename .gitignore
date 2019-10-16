@@ -4,6 +4,7 @@ build/
 gradle/
 lib/
 out/
+logs/
 healthnet-logging-module.iml
 gradlew
 gradlew.bat

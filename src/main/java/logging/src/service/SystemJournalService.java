@@ -38,7 +38,7 @@ public class SystemJournalService {
     }
 
     @Transactional
-    public void writeMassage(@NonNull User user, @NonNull final String massage) {
+    public void writeMassage(@NonNull final User user, @NonNull final String massage) {
         systemJournalMassageRepository.save(new SystemJournalMassage(user, massage));
     }
 }
