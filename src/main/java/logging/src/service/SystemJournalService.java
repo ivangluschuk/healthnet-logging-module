@@ -3,18 +3,18 @@ package logging.src.service;
 import logging.src.domain.SystemJournal;
 import logging.src.domain.SystemJournalMassage;
 import logging.src.domain.User;
+import logging.src.repository.OffsetBasedPageRequest;
 import logging.src.repository.SystemJournalMassageRepository;
 import lombok.NonNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
 @Service
+@Slf4j
 public class SystemJournalService {
-
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private final SystemJournalMassageRepository systemJournalMassageRepository;
 
@@ -22,9 +22,11 @@ public class SystemJournalService {
         this.systemJournalMassageRepository = systemJournalMassageRepository;
     }
 
-    public SystemJournal getUserSystemJournal(@NonNull final Long id) {
-        final var massages = systemJournalMassageRepository.findByUserId(id);
-        logger.info("The system journal found for the user with id: " + id);
+    public SystemJournal getUserSystemJournal(@NonNull final Long id, int limit, int offset) {
+        Pageable pageable = new OffsetBasedPageRequest(limit, offset);
+
+        final var massages = systemJournalMassageRepository.findByUserId(id, pageable);
+        log.info("The system journal found for the user id {} with limit {} and offset {}", id, limit, offset);
 
         return new SystemJournal(massages);
     }

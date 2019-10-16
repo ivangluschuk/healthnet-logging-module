@@ -16,13 +16,15 @@ public class SystemJournalController {
         this.systemJournalService = systemJournalService;
     }
 
-    @GetMapping("/journal/id={id}")
-    public UserSystemJournalResponse getUserSystemJournal(@PathVariable("id") Long id) {
-        var systemJournal = systemJournalService.getUserSystemJournal(id);
+    @GetMapping("/journal/id={id}&limit={limit}&offset={offset}")
+    public UserSystemJournalResponse getUserSystemJournal(@PathVariable("id") Long id,
+                                                            @PathVariable("limit") int limit,
+                                                            @PathVariable("offset") int offset) {
+        var systemJournal = systemJournalService.getUserSystemJournal(id, limit, offset);
         return new UserSystemJournalResponse(systemJournal);
     }
 
-    @GetMapping("/journal")
+    @GetMapping("/journal/all")
     public SystemJournalResponse getUserSystemJournal() {
         return new SystemJournalResponse(systemJournalService.getSystemJournal());
     }
