@@ -9,17 +9,14 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class SystemJournalMassage {
 
-    @Getter
-    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Getter
-    @Setter
     @NonNull
     @OneToOne(
             targetEntity = User.class,
@@ -29,8 +26,6 @@ public class SystemJournalMassage {
     @JoinColumn(name = "usr_id", referencedColumnName = "id")
     User user;
 
-    @Getter
-    @Setter
     @NonNull
     @Column(name = "massage")
     private String massage;

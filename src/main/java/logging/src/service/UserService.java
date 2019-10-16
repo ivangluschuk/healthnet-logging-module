@@ -3,15 +3,13 @@ package logging.src.service;
 import logging.src.domain.User;
 import logging.src.repository.UserRepository;
 import lombok.NonNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 
 @Service
+@Slf4j
 public class UserService {
-
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private final SystemJournalService systemJournalService;
     private final UserRepository userRepository;
@@ -23,7 +21,7 @@ public class UserService {
     }
 
     public void mockWork(@NonNull User user, @NonNull final String massage) {
-        logger.info(massage);
+        log.info(massage);
         systemJournalService.writeMassage(user, massage);
     }
 

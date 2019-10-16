@@ -1,15 +1,10 @@
 package logging.src.payload;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
+@Data
 class UserResponse {
 
-    @Getter
-    @Setter
     private long id;
-
-    @Getter
-    @Setter
     private String name;
 }

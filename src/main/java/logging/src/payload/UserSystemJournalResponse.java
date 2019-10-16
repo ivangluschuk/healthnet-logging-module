@@ -1,15 +1,16 @@
 package logging.src.payload;
 
 import logging.src.domain.SystemJournal;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class UserSystemJournalResponse {
+
+    private UserResponse user;
+    private List<SystemJournalMassageResponse> massages;
 
     public UserSystemJournalResponse(@NonNull final SystemJournal systemJournal) {
         final var systemMassages = systemJournal.getSystemJournalMassages();
@@ -30,24 +31,11 @@ public class UserSystemJournalResponse {
         }
     }
 
-    @Getter
-    @Setter
-    private UserResponse user;
-
-    @Getter
-    @Setter
-    private List<SystemJournalMassageResponse> massages;
-
-
+    @Data
     @AllArgsConstructor
     private static class SystemJournalMassageResponse {
 
-        @Getter
-        @Setter
         private int id;
-
-        @Getter
-        @Setter
         private String massage;
     }
 }

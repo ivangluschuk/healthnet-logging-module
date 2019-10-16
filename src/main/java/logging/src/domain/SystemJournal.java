@@ -1,19 +1,14 @@
 package logging.src.domain;
 
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-@RequiredArgsConstructor
+@Data
 public class SystemJournal {
 
-    @Getter
-    @Setter
     @NonNull
     List<SystemJournalMassage> systemJournalMassages;
 }
